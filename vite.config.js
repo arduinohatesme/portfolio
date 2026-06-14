@@ -1,10 +1,10 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from "vite";
 
 export default defineConfig({
-  root: './site',
-  base: '/arduinohatesme/',
+  root: ".",
+  base: "/arduinohatesme/",
   build: {
-    outDir: '../site-dist',
+    outDir: "./dist",
     emptyOutDir: true,
-  }
-})
+  },
+});
