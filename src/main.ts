@@ -1,4 +1,4 @@
-import "./style.css";
+import "../style.css";
 
 const text_element: HTMLElement | null = document.querySelector(
   "#cycling-experience",
