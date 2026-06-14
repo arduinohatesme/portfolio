@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   root: ".",
-  base: "/arduinohatesme/",
+  base: "/portfolio/",
   build: {
     outDir: "./dist",
     emptyOutDir: true,
