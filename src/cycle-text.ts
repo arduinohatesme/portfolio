@@ -12,26 +12,30 @@ function randHex() {
   return hex.join("");
 }
 
-async function typeText(t: string, element: HTMLElement) {
+export async function typeText(
+  t: string,
+  element: HTMLElement,
+  min: number = 50,
+  max: number = 100,
+) {
   for (const letter of t) {
-    let min = 50;
-    let max = 100;
-
+    let letter_min = min;
+    let letter_max = max;
     if (letter === " ") {
-      min += 30;
-      max += 30;
+      letter_min += 30;
+      letter_max += 30;
     } else if (letter in ["q", "w", "z", "y", "g", "h"]) {
-      min += 10;
-      max += 10;
+      letter_min += 10;
+      letter_max += 10;
     } else if (letter in [".", ",", ";", ":", "?", "/", "!", "(", ")"]) {
-      min += 50;
-      max += 50;
+      letter_min += 50;
+      letter_max += 50;
     } else if (element.textContent.length <= 1) {
-      min -= 40;
-      max -= 80;
+      letter_min -= 40;
+      letter_max -= 80;
     }
 
-    await sleep(randInt(min, max));
+    await sleep(randInt(letter_min, letter_max));
     element.textContent += letter;
   }
 }
@@ -55,7 +59,7 @@ export async function cycleText(texts: Array<string>, element: HTMLElement) {
   }
   let t = in_use.splice(randInt(0, in_use.length - 1), 1)[0];
 
-  await typeText(t, element);
+  await typeText(t, element, 50, 100);
   await sleep(randInt(200, 350));
   setTimeout(async () => await cycleText(texts, element), 500);
 }

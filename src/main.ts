@@ -1,5 +1,5 @@
 import "../style.css";
-import { cycleText } from "./cycle-text.ts";
+import { cycleText, typeText } from "./cycle-text.ts";
 import { getPinnedRepos } from "./get-pinned.ts";
 import RepoCard from "./repo-card.ts";
 
@@ -7,6 +7,8 @@ const repo_cards: HTMLCollectionOf<Element> | null =
   document.getElementsByTagName("repo-card");
 const head_cycle_element: HTMLElement | null =
   document.querySelector("#cycling-header");
+const head_greeting_element: HTMLElement | null =
+  document.querySelector("#head-greeting");
 
 const possible_head_contents: Array<string> = [
   "a software engineer.",
@@ -23,37 +25,60 @@ const possible_head_contents: Array<string> = [
   "a bad frontend dev.",
   "a rock climber!",
   "half-decent at Python.",
-  "learning Rust.",
+  "an up-and-coming Rusteacean!",
+  "smarter than the average bear.",
+  "doing my own thing.",
+  "vibing without AI.",
+  "still learning.",
+  "working on the puns.",
+  "never done with my dotfiles.",
+  "in control of my computer.",
+  "still at it!",
+  "a passable Horn player",
 ];
 
-if (head_cycle_element !== null) {
-  cycleText(possible_head_contents, head_cycle_element);
-}
-
-if (!customElements.get("repo-card")) {
-  customElements.define("repo-card", RepoCard);
-}
-
-const repos: Array<Object> = await getPinnedRepos();
-
-for (const [i, card] of Array.from(repo_cards).entries()) {
-  let repo = repos[i];
-  if (repo === undefined) {
-    card.remove();
-    continue;
+const typeHead = async () => {
+  if (head_greeting_element !== null) {
+    await typeText(
+      "Hi. I'm Aidan McMillan. I'm",
+      head_greeting_element,
+      20,
+      70,
+    );
   }
-  if (
-    "author" in repo &&
-    "name" in repo &&
-    "description" in repo &&
-    "stars" in repo &&
-    "desc" in card &&
-    "repo" in card &&
-    "stars" in card
-  ) {
-    card.repo = `${repo.author}/${repo.name}`;
-    card.desc = repo.description;
-    card.stars = repo.stars;
-    (card as any).enabled = "enabled";
+
+  if (head_cycle_element !== null) {
+    cycleText(possible_head_contents, head_cycle_element);
   }
-}
+};
+
+const makeRepoCards = async () => {
+  if (!customElements.get("repo-card")) {
+    customElements.define("repo-card", RepoCard);
+  }
+
+  const repos = await getPinnedRepos();
+  for (const [i, card] of Array.from(repo_cards).entries()) {
+    let repo = repos[i];
+    if (repo === undefined) {
+      card.remove();
+      continue;
+    }
+    if (
+      "author" in repo &&
+      "name" in repo &&
+      "description" in repo &&
+      "stars" in repo &&
+      "desc" in card &&
+      "repo" in card &&
+      "stars" in card
+    ) {
+      card.repo = `${repo.author}/${repo.name}`;
+      card.desc = repo.description;
+      card.stars = repo.stars;
+      (card as any).enabled = "enabled";
+    }
+  }
+};
+
+Promise.all([typeHead(), makeRepoCards()]);

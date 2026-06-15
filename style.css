@@ -19,7 +19,7 @@ h2 {
 .hr-right {
   border: none;
   border-top: 1px solid #333;
-  margin: 16px 40% 24px auto;
+  margin: 18px 40% 24px auto;
 }
 
 .vl {
@@ -29,6 +29,18 @@ h2 {
   left: 50%;
   margin-left: -0.5px;
   top: 0;
+  transition: height 1.0s;
+  animation: growDown 1.0s ease-out forwards;
+  transform-origin: top;
+}
+
+@keyframes growDown {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
 }
 
 #right-content {
@@ -39,6 +51,7 @@ h2 {
 #head-image-container {
   position: relative;
   width: 100%;
+  animation: fadeFromRight 1.0s ease-out forwards;
 }
 
 #head-image {
@@ -46,11 +59,32 @@ h2 {
   width: 12%;
   right: 52%;
   border-radius: 32px;
+  transition: all 0.5s
+  animation: fadeFromRight 0.5s ease-out forwards;
+}
+
+@keyframes fadeFromRight {
+  0% {
+    transform: translateX(20px) scale(0.4);
+    opacity: 0;
+  }
+  90% {
+    transform: translateX(1px) scale(0.99);
+    opacity: 0.99;
+  }
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
 }
 
 .right-container {
   position: relative;
   width: 100%;
+}
+
+.right-element {
+  margin-bottom: 0px;
 }
 
 #projects-head-container {
@@ -59,6 +93,7 @@ h2 {
 
 #cycling-header {
   margin: 0;
+  padding-right: 40%;
 }
 
 repo-card {
@@ -66,7 +101,9 @@ repo-card {
   width: 25%;
   height: 110px;
   border-radius: 20px;
-  transition: all 0.3s;
+  transform: translate(0, 0);
+  box-shadow: 0 0 #000;
+  transition: color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   flex: 1;
   margin-top: 0;
@@ -105,7 +142,7 @@ repo-card:hover[enabled] {
   text-decoration: none;
   color: inherit;
   display: block;
-  height: 150px;
+  height: 110px;
 
   background: transparent;
 }

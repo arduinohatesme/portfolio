@@ -6,7 +6,7 @@ export default class RepoCard extends HTMLElement {
   connectedCallback() {
     const repo = this.getAttribute("repo") || "Repo Name";
     const desc = this.getAttribute("desc") || "Description";
-    const stars = this.getAttribute("stars") || 0;
+    const stars = this.getAttribute("stars") || "0";
     const enabled = this.getAttribute("enabled") || false;
 
     this.innerHTML = `
@@ -80,7 +80,7 @@ export default class RepoCard extends HTMLElement {
         </h3>
         <div class="repo-desc-stars">
           <p class="repo-desc">${desc}</p>
-          <p class="repo-stars">${stars} Stars</p>
+          <p class="repo-stars">${stars} ${stars === "1" ? "Star" : "Stars"}</p>
         </div>
       </a>
     `;
