@@ -1,11 +1,103 @@
 * {
   background-color: #111;
   color: #ddd;
-  font-family: "Lucida Console", monospace;
-  margin: 32px;
+  font-family: monospace;
+  margin: 32px 0;
 }
 
-#cycling-experience {
-  color: #faa;
+h1 {
+  font-size: 32px;
+  padding-top: 32px;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+.hr-right {
+  border: none;
+  border-top: 1px solid #333;
+  margin: 16px 40% 48px auto;
+}
+
+.vl {
+  border-left: 1px solid #333;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  margin-left: -0.5px;
+  top: 0;
+}
+
+#right-content {
+  margin-left: 52%;
+  position: relative;
+}
+
+#head-image-container {
+  position: relative;
+  width: 100%;
+}
+
+#head-image {
+  position: absolute;
+  width: 12%;
+  right: 52%;
+  border-radius: 32px;
+}
+
+.right-container {
+  position: relative;
+  width: 100%;
+}
+
+#cycling-header {
   margin: 0;
+}
+
+.repo-card,
+repo-card {
+  display: block;
+  width: 25%;
+  height: 200px;
+}
+
+.repo-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+
+  border: 1px solid #333;
+  border-radius: 16px;
+  background-color: #222;
+}
+
+.repo-head {
+  margin: 16px 0 0 18px;
+  font-family: monospace;
+  font-weight: normal;
+  font-size: 16px;
+  color: #999;
+  background-color: transparent;
+}
+
+.repo-desc-stars {
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+}
+
+.repo-desc {
+  margin: 16px 0 14px 18px;
+  width: 80%;
+  background-color: transparent;
+}
+
+.repo-stars {
+  margin: 16px 18px 16px 0;
+  background-color: transparent;
+  white-space: nowrap;
+  text-align: right;
 }

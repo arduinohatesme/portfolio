@@ -1,16 +1,39 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style rel="stylesheet" href="/style.css"></style>
+    <script type="module" src="/src/main.ts"></script>
+    <title>arduinohatesme</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style rel="stylesheet" href=",/style.css"></style>
-  <script type="module" src="./src/main.ts"></script>
-  <title>arduinohatesme</title>
-</head>
-
-<body>
-  <h1>Hi. I'm Aidan McMillan. I'm <span id="cycling-experience"></span></h1>
-</body>
-
+  <body>
+    <div class="vl"></div>
+    <div id="head-image-container" align="center">
+      <img
+        id="head-image"
+        src="./assets/head_img.jpg"
+        alt="An accidental photo of me"
+        align="right"
+      />
+    </div>
+    <div id="right-content">
+      <div class="right-container">
+        <h1 class="right-element">
+          Hi. I'm Aidan McMillan. I'm
+          <span align="left" id="cycling-header"></span>
+        </h1>
+        <div class="hr-right" />
+      </div>
+      <div class="right-container">
+        <h2 class="right-element">Here's what I'm up to:</h2>
+      </div>
+      <repo-card
+        repo="arduinohatesme/portfolio"
+        desc="my portfolio"
+        stars="341"
+      ></repo-card>
+    </div>
+  </body>
 </html>
