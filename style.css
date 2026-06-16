@@ -85,6 +85,7 @@ h2 {
 
 .right-element {
   margin-bottom: 0px;
+  padding-right: 40%;
 }
 
 #projects-head-container {
@@ -93,7 +94,23 @@ h2 {
 
 #cycling-header {
   margin: 0;
-  padding-right: 40%;
+  color: inherit;
+}
+
+#head-cursor {
+  display: inline-block;
+  animation: blinkCursor 1s steps(1) infinite;
+  margin: 0;
+  color: inherit;
+}
+
+@keyframes blinkCursor {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 repo-card {
