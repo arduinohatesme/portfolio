@@ -1,7 +1,8 @@
 import "../style.css";
 import { cycleText, typeText } from "./cycle-text.ts";
 import { getPinnedRepos } from "./get-pinned.ts";
-import RepoCard from "./repo-card.ts";
+import RepoCard from "./repo-card/repo-card.ts";
+import "./repo-card/repo-card.css";
 
 const repo_cards: HTMLCollectionOf<Element> | null =
   document.getElementsByTagName("repo-card");
