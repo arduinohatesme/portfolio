@@ -2,7 +2,7 @@ import "../style.css";
 import { cycleText, typeText } from "./cycle-text.ts";
 import { getPinnedRepos } from "./get-pinned.ts";
 import RepoCard from "./repo-card/repo-card.ts";
-import "./repo-card/repo-card.css";
+import StackCard from "./stack-card/stack-card.ts";
 
 const repo_cards: HTMLCollectionOf<Element> | null =
   document.getElementsByTagName("repo-card");
@@ -39,6 +39,12 @@ const possible_head_contents: Array<string> = [
   "still at it!",
   "a passable Horn player.",
 ];
+
+const declareStackCard = async () => {
+  if (!customElements.get("stack-card")) {
+    customElements.define("stack-card", StackCard);
+  }
+};
 
 const typeHead = async () => {
   if (head_greeting_element !== null) {
@@ -84,4 +90,4 @@ const makeRepoCards = async () => {
   }
 };
 
-Promise.all([typeHead(), makeRepoCards()]);
+Promise.all([typeHead(), makeRepoCards(), declareStackCard()]);
