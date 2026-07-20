@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-deploy:
-    runs-on: host
+    runs-on: thirtyoneiron
 
     steps:
       - name: Checkout
