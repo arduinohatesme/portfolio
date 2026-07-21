@@ -1,4 +1,5 @@
 import "./repo-card.css";
+
 export default class RepoCard extends HTMLElement {
   static get observedAttributes() {
     return ["repo", "desc", "stars", "enabled"];
@@ -11,7 +12,7 @@ export default class RepoCard extends HTMLElement {
     const enabled = this.getAttribute("enabled") || false;
 
     this.innerHTML = `
-      <a class="repo-link" href="https://github.com/${repo}" target="_blank" class=${enabled ? "" : ".disabled-link"}>
+      <a class="repo-link" href="https://git.arduinohates.me/${repo}" target="_blank" class=${enabled ? "" : ".disabled-link"}>
         <h3 class="repo-head">
           ${repo}
         </h3>
@@ -70,7 +71,7 @@ export default class RepoCard extends HTMLElement {
           pointer-events: none;
         }
       </style>
-      <a class="repo-link" href="https://github.com/${repo}" target="_blank" class=${enabled ? "" : ".disabled-link"}>
+      <a class="repo-link" href="https://git.arduinohates.me/${repo}" target="_blank" class=${enabled ? "" : ".disabled-link"}>
         <h3 class="repo-head">
           ${repo}
         </h3>

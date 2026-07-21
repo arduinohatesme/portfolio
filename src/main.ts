@@ -1,6 +1,6 @@
+import axios from "axios";
 import "../style.css";
 import { cycleText, typeText } from "./cycle-text.ts";
-import { getPinnedRepos } from "./get-pinned.ts";
 import RepoCard from "./repo-card/repo-card.ts";
 import StackCard from "./stack-card/stack-card.ts";
 
@@ -17,7 +17,6 @@ const possible_head_contents: Array<string> = [
   "a software engineer.",
   "a maker.",
   "a builder of all things cool!",
-  "an arch user (btw).",
   "a neovim user (btw).",
   "the band spirit!",
   "a fusioneer!",
@@ -61,6 +60,22 @@ const typeHead = async () => {
   }
 };
 
+export async function getPinnedRepos() {
+  const repos = ["arduinohatesme/dotfiles", "arduinohatesme/portfolio", "arduinohatesme/snowtracks", "arduinohatesme/lasagne-22"];
+  let repos_data: Array<JSON> = []
+
+  for (const repo of repos) {
+    axios.get(`https://git.arduinohates.me/api/v1/repos/${repo}`).then((res) => { console.log("got data", repos_data); repos_data.push(res.data) }).catch((err) => {
+      console.log(`Error getting pinned repos: ${err}`);
+      repos_data.push(err);
+    });
+  }
+
+  console.log(repos_data);
+
+  return repos_data;
+}
+
 const makeRepoCards = async () => {
   if (!customElements.get("repo-card")) {
     customElements.define("repo-card", RepoCard);
@@ -73,6 +88,9 @@ const makeRepoCards = async () => {
       card.remove();
       continue;
     }
+
+    console.log(repo);
+
     if (
       "author" in repo &&
       "name" in repo &&
