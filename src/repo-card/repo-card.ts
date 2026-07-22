@@ -10,6 +10,7 @@ export default class RepoCard extends HTMLElement {
     const desc = this.getAttribute("desc") || "Description";
     const stars: number = Number(this.getAttribute("stars")) || 0;
     const enabled = Boolean(this.getAttribute("enabled")) || false;
+
     return `<style>
         .disabled-link {
           pointer-events: none;
@@ -54,8 +55,7 @@ export default class RepoCard extends HTMLElement {
 
         set(val: string | boolean) {
           if (attr === "enabled") {
-            if (val) this.setAttribute(attr, "");
-            else this.removeAttribute(attr);
+            this.toggleAttribute(attr, Boolean(val));
           } else {
             this.setAttribute(attr, String(val));
           }
@@ -81,17 +81,19 @@ export default class RepoCard extends HTMLElement {
       return;
     }
 
-    if (name !== "enabled") {
-      const el = this.querySelector(
-        `.repo-${name === "stars" ? "stars" : name === "repo" ? "head" : "desc"}`
-      );
+    if (name === "enabled") {
+      return;
+    }
 
-      if (el) {
-        el.textContent =
-          name === "stars"
-            ? `${(newValue as string) || 0} Stars`
-            : (newValue as string) || "";
-      }
+    const el = this.querySelector(
+      `.repo-${name === "stars" ? "stars" : name === "repo" ? "head" : "desc"}`
+    );
+
+    if (el) {
+      el.textContent =
+        name === "stars"
+          ? `${(newValue as string) || 0} Stars`
+          : (newValue as string) || "";
     }
   }
 }
