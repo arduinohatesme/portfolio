@@ -81,19 +81,17 @@ export default class RepoCard extends HTMLElement {
       return;
     }
 
-    if (name === "enabled") {
-      return;
-    }
-
-    const el = this.querySelector(
+    const element = this.querySelector(
       `.repo-${name === "stars" ? "stars" : name === "repo" ? "head" : "desc"}`
     );
 
-    if (el) {
-      el.textContent =
-        name === "stars"
-          ? `${(newValue as string) || 0} Stars`
-          : (newValue as string) || "";
+    if (!element) {
+      return;
     }
+
+    element.textContent =
+      name === "stars"
+        ? `${(newValue as string) || 0} Stars`
+        : (newValue as string) || "";
   }
 }
