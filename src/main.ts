@@ -3,6 +3,7 @@ import "../style.css";
 import { cycleText, typeText } from "./cycle-text.ts";
 import RepoCard from "./repo-card/repo-card.ts";
 import StackCard from "./stack-card/stack-card.ts";
+import { possible_head_contents } from "./head-contents.ts";
 
 const repo_cards: HTMLCollectionOf<Element> | null =
   document.getElementsByTagName("repo-card");
@@ -13,32 +14,6 @@ const head_greeting_element: HTMLElement | null =
 const head_color_element: HTMLElement | null =
   document.querySelector("#colored-head");
 
-const possible_head_contents: Array<string> = [
-  "a software engineer.",
-  "a maker.",
-  "a builder of all things cool!",
-  "a neovim user (btw).",
-  "the band spirit!",
-  "a fusioneer!",
-  "the centerer of divs.",
-  "more skilled than yesterday.",
-  "a trad coder.",
-  "not an outsourced thinker.",
-  "a bad frontend dev.",
-  "a rock climber!",
-  "half-decent at Python.",
-  "an up-and-coming Rusteacean!",
-  "smarter than the average bear.",
-  "doing my own thing.",
-  "vibing without AI.",
-  "still learning.",
-  "working on the puns.",
-  "never done with my dotfiles.",
-  "in control of my computer.",
-  "still at it!",
-  "a passable Horn player.",
-];
-
 const declareStackCard = async () => {
   if (!customElements.get("stack-card")) {
     customElements.define("stack-card", StackCard);
@@ -46,29 +21,42 @@ const declareStackCard = async () => {
 };
 
 const typeHead = async () => {
-  if (head_greeting_element !== null) {
+  if (head_greeting_element) {
     await typeText(
       "Hi. I'm Aidan McMillan. I'm",
       head_greeting_element,
       20,
-      70,
+      70
     );
   }
 
-  if (head_cycle_element !== null && head_color_element) {
-    cycleText(possible_head_contents, head_cycle_element, head_color_element);
+  if (!head_color_element || !head_cycle_element) {
+    return;
   }
+
+  cycleText(possible_head_contents, head_cycle_element, head_color_element);
 };
 
 export async function getPinnedRepos() {
-  const repos = ["arduinohatesme/dotfiles", "arduinohatesme/portfolio", "arduinohatesme/snowtracks", "arduinohatesme/lasagne-22"];
-  let repos_data: Array<JSON> = []
+  const repos = [
+    "arduinohatesme/dotfiles",
+    "arduinohatesme/portfolio",
+    "arduinohatesme/snowtracks",
+    "arduinohatesme/lasagne-22",
+  ];
+  let repos_data: Array<JSON> = [];
 
   for (const repo of repos) {
-    axios.get(`https://git.arduinohates.me/api/v1/repos/${repo}`).then((res) => { console.log("got data", repos_data); repos_data.push(res.data) }).catch((err) => {
-      console.log(`Error getting pinned repos: ${err}`);
-      repos_data.push(err);
-    });
+    axios
+      .get(`https://git.arduinohates.me/api/v1/repos/${repo}`)
+      .then((res) => {
+        console.log("got data", repos_data);
+        repos_data.push(res.data);
+      })
+      .catch((err) => {
+        console.log(`Error getting pinned repos: ${err}`);
+        repos_data.push(err);
+      });
   }
 
   console.log(repos_data);
