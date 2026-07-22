@@ -37,7 +37,7 @@ const typeHead = async () => {
   cycleText(possible_head_contents, head_cycle_element, head_color_element);
 };
 
-export async function getPinnedRepos() {
+export async function getCurrentProjects() {
   const repos = [
     "arduinohatesme/dotfiles",
     "arduinohatesme/portfolio",
@@ -54,12 +54,10 @@ export async function getPinnedRepos() {
         repos_data.push(res.data);
       })
       .catch((err) => {
-        console.log(`Error getting pinned repos: ${err}`);
+        console.log(`Error getting info for ${repo}: ${err}`);
         repos_data.push(err);
       });
   }
-
-  console.log(repos_data);
 
   return repos_data;
 }
@@ -69,7 +67,7 @@ const makeRepoCards = async () => {
     customElements.define("repo-card", RepoCard);
   }
 
-  const repos = await getPinnedRepos();
+  const repos = await getCurrentProjects();
   for (const [i, card] of Array.from(repo_cards).entries()) {
     let repo = repos[i];
     if (repo === undefined) {
@@ -80,17 +78,16 @@ const makeRepoCards = async () => {
     console.log(repo);
 
     if (
-      "author" in repo &&
-      "name" in repo &&
+      "full_name" in repo &&
       "description" in repo &&
-      "stars" in repo &&
+      "stars_count" in repo &&
       "desc" in card &&
       "repo" in card &&
       "stars" in card
     ) {
-      card.repo = `${repo.author}/${repo.name}`;
+      card.repo = repo.full_name;
       card.desc = repo.description;
-      card.stars = repo.stars;
+      card.stars = repo.stars_count;
       (card as any).enabled = "enabled";
     }
   }
